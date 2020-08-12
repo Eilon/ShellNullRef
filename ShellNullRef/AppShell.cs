@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-using XF = Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace ShellNullRef
 {
     public class AppShell : Xamarin.Forms.Shell
     {
+        private static bool UseDummyShellItem = true;
+
         private readonly ShellContentMarkerItem _dummyShellContent = new ShellContentMarkerItem();
 
         public AppShell()
         {
-            Items.Add(_dummyShellContent);
+            if (UseDummyShellItem)
+            {
+                Items.Add(_dummyShellContent);
+            }
 
             Device.InvokeOnMainThreadAsync(() =>
             {
@@ -29,20 +31,23 @@ namespace ShellNullRef
                 };
                 Items.Add(shellContent);
 
-                //var didRemove = Items.Remove(_dummyShellContent);
+                if (UseDummyShellItem)
+                {
+                    var didRemove = Items.Remove(_dummyShellContent);
+                }
             });
         }
     }
 
-    internal sealed class ShellContentMarkerItem : XF.FlyoutItem
+    internal sealed class ShellContentMarkerItem : FlyoutItem
     {
         public ShellContentMarkerItem()
         {
             // Set dummy content to ensure the item is valid
-            var tab = new XF.Tab();
-            tab.Items.Add(new XF.ShellContent
+            var tab = new Tab();
+            tab.Items.Add(new ShellContent
             {
-                Content = new XF.ContentPage()
+                Content = new ContentPage()
             });
             Items.Add(tab);
         }
