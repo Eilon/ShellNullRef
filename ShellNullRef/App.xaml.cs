@@ -1,8 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using ShellNullRef.Services;
-using ShellNullRef.Views;
 
 namespace ShellNullRef
 {
@@ -13,11 +10,6 @@ namespace ShellNullRef
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
-            //MainPage = new ContentPage()
-            //{ 
-            //    Content = new Label { Text="Hi" },
-            //};
             MainPage = new AppShell();
         }
 
